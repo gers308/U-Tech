@@ -1,0 +1,51 @@
+﻿@section Styles {
+    <style>
+        .form-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            max-width: 500px;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+            .form-card h2 {
+                text-align: center;
+                font-weight: 700;
+                margin-bottom: 20px;
+            }
+
+            .form-card button {
+                width: 100%;
+            }
+
+        .btn-back-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+    </style>
+}
+
+<div class="form-card">
+    <h2>Decisión del Cliente</h2>
+
+    <form asp-action="GuardarDecision" method="post">
+        <input type="hidden" name="Solicitud_ID" value="@ViewBag.SolicitudID" />
+
+        <label><strong>¿El cliente acepta la reparación?</strong></label>
+        <select name="Decision" class="form-control" required>
+            <option value="Aceptar">Aceptar</option>
+            <option value="Rechazar">Rechazar</option>
+        </select>
+
+        <button type="submit" class="btn btn-success mt-4">Guardar Decisión</button>
+    </form>
+
+    <div class="btn-back-container">
+        <a href="/Recepcionista/SolicitudesDiagnosticadas" class="btn btn-secondary">Volver</a>
+    </div>
+</div>
+
+

@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Recuperar Contraseña";
+}
+
+<div class="container" style="max-width:400px;margin-top:80px;">
+    <h2 class="text-center">Recuperar Contraseña</h2>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger mt-3">
+            @TempData["Error"]
+        </div>
+    }
+
+    <p class="text-center">Ingrese su nombre de usuario o correo electrónico.</p>
+
+    <form asp-action="SolicitarRecuperacion" method="post">
+        <div class="form-group">
+            <label for="identificador" class="form-label">Usuario o Email</label>
+            <input type="text"
+                   id="identificador"
+                   name="identificador"
+                   class="form-control"
+                   required />
+        </div>
+
+        <button type="submit" class="btn btn-warning w-100 mt-3">
+            Verificar Usuario
+        </button>
+
+        <a href="@Url.Action("Index", "Login")" class="btn btn-secondary w-100 mt-3">
+            Cancelar
+        </a>
+    </form>
+</div>

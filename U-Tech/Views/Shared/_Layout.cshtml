@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - U_Tech Sistema</title>
+    <script type="importmap"></script>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/U_Tech.styles.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <!-- ⭐ ESTA ES LA LÍNEA QUE FALTABA ⭐ -->
+    @RenderSection("Styles", required: false)
+</head>
+
+<body>
+    <header>
+        @{
+            var rol = Context.Session.GetString("Rol");
+        }
+
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light navbar-modern">
+            <div class="container-fluid">
+
+                <a class="navbar-brand">U-Tech Sistema</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="menu">
+
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 menu-desplazado">
+
+                        @if (rol == "Personal")
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-controller="Recepcionista" asp-action="Index">🏠 Inicio</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Recepcionista" asp-action="RegistrarCliente">👤 Registrar Cliente</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Recepcionista" asp-action="RegistrarPC">💻 Registrar PC</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Recepcionista" asp-action="CrearSolicitud">📄 Crear Solicitud</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Recepcionista" asp-action="SolicitudesDiagnosticadas"> Decisión Cliente </a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Recepcionista" asp-action="ComputadorasFinalizadas"> 📦 Entregas </a></li>
+                        }
+
+                        @if (rol == "Tecnico")
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-controller="Tecnico" asp-action="Index">🛠 Mis Solicitudes</a></li>
+                        }
+
+                        @if (rol == "GerenteSucursal")
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-controller="Gerente" asp-action="Index">🏢 Panel Gerente</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Gerente" asp-action="EstadoSucursal">📊 Estado General</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Gerente" asp-action="PersonalSucursal">👥 Personal</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Gerente" asp-action="ReportesSucursal">📈 Rendimiento</a></li>
+                        }
+
+                        @if (rol == "Administrador")
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-controller="Admin" asp-action="Index">🌍 Admin Global</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Admin" asp-action="GestionSucursales">🏢 Sucursales</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Admin" asp-action="GestionUsuarios">👥 Usuarios</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Admin" asp-action="VerExpedientes">📚 Expedientes</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Admin" asp-action="ReportesGlobales">📊 Reportes Globales</a></li>
+                        }
+
+                    </ul>
+
+                    <div class="ms-auto d-flex align-items-center">
+                        @if (!string.IsNullOrEmpty(rol))
+                        {
+                            <span class="navbar-text me-3">Rol: @rol</span>
+                            <a class="btn-logout" asp-controller="Login" asp-action="Logout">Cerrar Sesión</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+
+            <div class="main-content-card">
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+
+    <footer class="border-top footer">
+        <div class="container">
+            &copy; 2025 - Casa Matriz U-Tech Proyecto UML -
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

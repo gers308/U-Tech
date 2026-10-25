@@ -1,0 +1,110 @@
+﻿@section Styles {
+    <style>
+        .form-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 25px 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+            .form-card h2 {
+                text-align: center;
+                font-weight: 700;
+                margin-bottom: 20px;
+            }
+
+            .form-card label {
+                font-weight: 600;
+                margin-top: 12px;
+            }
+
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+    </style>
+}
+
+<div class="form-card">
+
+    <h2>Crear Solicitud de Servicio</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    <div class="d-flex justify-content-center mb-3">
+        <a href="/Recepcionista/ListaComputadoras" class="btn btn-primary">Buscar Computadora</a>
+    </div>
+
+    <form method="post" asp-action="CrearSolicitud" id="solicitudForm">
+
+        <label>PC Seleccionada:</label>
+        <input type="text" name="PC_ID" class="form-control"
+               value="@ViewBag.PCSeleccionada"
+               placeholder="Seleccione una PC desde 'Buscar Computadora'"
+               readonly required />
+
+        <small class="form-text text-muted mb-2">
+            ID de la computadora seleccionada.
+        </small>
+
+        <span id="pcError" class="text-danger"></span>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success" id="btnCrearSolicitud">Crear Solicitud</button>
+            <a href="/Recepcionista" class="btn btn-secondary">Volver</a>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+
+        // Validación al enviar
+        document.getElementById('solicitudForm').addEventListener('submit', function (e) {
+            var pcId = document.querySelector('input[name="PC_ID"]').value;
+            var pcError = document.getElementById('pcError');
+
+            pcError.textContent = '';
+
+            if (!pcId || pcId <= 0) {
+                e.preventDefault();
+                pcError.textContent = 'Debe seleccionar una computadora usando el botón "Buscar Computadora".';
+                return;
+            }
+
+            var btn = document.getElementById('btnCrearSolicitud');
+            btn.disabled = true;
+            btn.innerHTML = 'Creando Solicitud...';
+        });
+
+        // Reset en caso de error del servidor
+        @if (TempData["Error"] != null)
+        {
+                <text>
+                    setTimeout(() => {
+                        var btn = document.getElementById('btnCrearSolicitud');
+                        btn.disabled = false;
+                        btn.innerHTML = 'Crear Solicitud';
+                    }, 100);
+                </text>
+        }
+
+        // Quitar mensaje de error si el campo cambia
+        document.querySelector('input[name="PC_ID"]').addEventListener('input', function () {
+            document.getElementById('pcError').textContent = '';
+        });
+    </script>
+}

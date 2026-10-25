@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Restablecer Contraseña";
+}
+
+<div class="container" style="max-width:400px;margin-top:80px;">
+    <h2 class="text-center">Nueva Contraseña</h2>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger mt-3">
+            @TempData["Error"]
+        </div>
+    }
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success mt-3">
+            @TempData["Success"]
+        </div>
+    }
+
+    <p class="text-center">Ingrese su nueva contraseña (mínimo 4 caracteres).</p>
+
+    <form asp-action="GuardarNuevaContrasena" method="post">
+
+        <input type="hidden" name="Personal_ID" value="@ViewBag.PersonalId" />
+
+        <div class="form-group">
+            <label for="NuevaContrasena" class="form-label">Nueva Contraseña</label>
+            <input type="password"
+                   id="NuevaContrasena"
+                   name="NuevaContrasena"
+                   class="form-control"
+                   required minlength="4" />
+        </div>
+
+        <button type="submit" class="btn btn-success w-100 mt-3">
+            Guardar y Finalizar
+        </button>
+
+        <a href="@Url.Action("Index", "Login")" class="btn btn-secondary w-100 mt-3">
+            Cancelar
+        </a>
+    </form>
+</div>

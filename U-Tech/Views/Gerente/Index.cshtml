@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Panel Gerente de Sucursal";
+}
+
+<h2 class="mb-3">Panel del Gerente de Sucursal</h2>
+
+<div class="list-group">
+    <a asp-controller="Gerente" asp-action="EstadoSucursal" class="list-group-item list-group-item-action">
+        📊 Ver estado de solicitudes de mi sucursal
+    </a>
+    <a asp-controller="Gerente" asp-action="ReportesSucursal" class="list-group-item list-group-item-action">
+        📈 Reportes de rendimiento de la sucursal
+    </a>
+    <a asp-controller="Gerente" asp-action="PersonalSucursal" class="list-group-item list-group-item-action">
+        👥 Ver personal asignado
+    </a>
+</div>
+
+
+
+
+<!-- Esta en modo de prueba posiblemente no usar, es un boton para que el gerente pueda generar un pdf sobre su sucursal -->
+<br />
+<p>prueba de boton para descargar pdf</p>
+<a asp-controller="Gerente" asp-action="DescargarReporteSucursalPDF" class="btn btn-success mt-3">
+    📄 Descargar Reporte Completo de la Sucursal
+</a>
+

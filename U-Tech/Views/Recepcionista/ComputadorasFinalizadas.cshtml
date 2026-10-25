@@ -1,0 +1,80 @@
+﻿@model System.Data.DataTable
+
+<div class="table-card">
+    <h2>Computadoras Finalizadas para Entrega</h2>
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID Reparación</th>
+                <th>Cliente</th>
+                <th>Marca</th>
+                <th>Tipo</th>
+                <th>Fecha de Finalización</th>
+                <th>Estado</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow row in Model.Rows)
+            {
+                <tr>
+                    <td>@row["Reparacion_ID"]</td>
+                    <td>@row["Cliente"]</td>
+                    <td>@row["Marca"]</td>
+                    <td>@row["Tipo_computadora"]</td>
+                    <td>@row["Fecha_Final"]</td>
+                    <td>@row["Estado_Final"]</td>
+
+                    <td>
+                        @if (row["Estado_Final"].ToString() == "Finalizado")
+                        {
+                            <form asp-action="EntregarComputadora" method="post" class="d-inline">
+                                <input type="hidden" name="reparacionId" value="@row["Reparacion_ID"]" />
+                                <button type="submit" class="btn btn-success btn-sm">Entregar</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <span class="text-muted">Entregado</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-center mt-3">
+        <a href="/Recepcionista" class="btn btn-secondary">Volver</a>
+    </div>
+</div>
+@section Styles {
+    <style>
+        .table-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            margin-bottom: 30px;
+        }
+
+        .table-card h2 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        table thead tr {
+            background: #f2f4f7;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        table thead th {
+            font-weight: 600;
+        }
+
+        table tbody tr:hover {
+            background: #f9f9f9;
+        }
+    </style>
+}

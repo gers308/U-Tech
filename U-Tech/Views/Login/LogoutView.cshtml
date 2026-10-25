@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Cerrando Sesión";
+    Layout = null; // No necesita usar el layout principal para cargar rápido.
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cerrando Sesión...</title>
+</head>
+<body>
+    <script>
+        // 1. Reemplaza la entrada actual del historial con una URL neutral.
+        // Esto evita que el botón 'Atrás' regrese a la página anterior al Logout.
+        window.history.replaceState(null, null, location.href);
+
+        // 2. Redirige a la página de inicio de sesión, eliminando la entrada de esta página del historial.
+        // Esto previene el acceso temporal a páginas anteriores.
+        location.replace("@Url.Action("Index", "Login")");
+    </script>
+</body>
+</html>

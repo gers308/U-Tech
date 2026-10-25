@@ -1,0 +1,101 @@
+﻿@section Styles {
+    <style>
+        /* CONTENEDOR PRINCIPAL (Tarjeta grande) */
+        .panel-recepcion-card {
+            background: #ffffff;
+            border-radius: 25px;
+            padding: 40px 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            max-width: 600px;
+            margin: 40px auto;
+            text-align: center;
+        }
+
+        .panel-recepcion-titulo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        /* BOTONES DEL PANEL */
+        .panel-recepcion-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 420px;
+            background: linear-gradient(to bottom, #d4eef7, #c6e3ef);
+            border: 2px solid #86c2db;
+            border-radius: 10px;
+            padding: 12px 18px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #084c74;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: all 0.2s ease-in-out;
+            text-decoration: none;
+        }
+
+            .panel-recepcion-btn i {
+                font-size: 1.4rem;
+                color: #0d5c8a;
+            }
+
+            .panel-recepcion-btn:hover {
+                background: linear-gradient(to bottom, #cbe7f3, #b8d9e7);
+                border-color: #5ab1d2;
+                transform: translateY(-3px);
+                box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+                color: #063f5d;
+            }
+
+                .panel-recepcion-btn:hover i {
+                    color: #063f5d;
+                }
+
+        /* CONTENEDOR DE BOTONES */
+        .panel-recepcion-container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            align-items: center;
+            margin-top: 10px;
+        }
+    </style>
+}
+<div class="panel-recepcion-card">
+
+    <div class="panel-recepcion-titulo">
+        Panel de Recepción
+    </div>
+
+    <div class="panel-recepcion-container">
+
+        <a asp-action="RegistrarCliente" class="panel-recepcion-btn">
+            Registrar Cliente
+            <i class="fas fa-user-plus"></i>
+        </a>
+
+        <a asp-action="RegistrarPC" class="panel-recepcion-btn">
+            Registrar Computadora
+            <i class="fas fa-laptop"></i>
+        </a>
+
+        <a asp-action="CrearSolicitud" class="panel-recepcion-btn">
+            Crear Solicitud
+            <i class="fas fa-file-alt"></i>
+        </a>
+
+        <a asp-action="SolicitudesDiagnosticadas" class="panel-recepcion-btn">
+            Solicitudes Diagnosticadas
+            <i class="fas fa-stethoscope"></i>
+        </a>
+
+        <a asp-action="ComputadorasFinalizadas" class="panel-recepcion-btn">
+            Ver Computadoras Finalizadas
+            <i class="fas fa-box-open"></i>
+        </a>
+
+    </div>
+</div>

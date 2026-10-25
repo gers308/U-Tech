@@ -1,0 +1,127 @@
+﻿@section Styles {
+    <style>
+        .form-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 25px 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+            .form-card h2 {
+                text-align: center;
+                font-weight: 700;
+                margin-bottom: 20px;
+            }
+
+            .form-card label {
+                margin-top: 12px;
+                font-weight: 600;
+            }
+
+            .form-card textarea {
+                resize: vertical;
+            }
+
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+    </style>
+}
+
+<div class="form-card">
+
+    <h2>Registrar Computadora</h2>
+
+    <!-- Mensajes -->
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    <!-- Botón de buscar cliente -->
+    <div class="d-flex justify-content-center mb-3">
+        <a href="/Recepcionista/ListaClientes" class="btn btn-primary">Buscar Cliente</a>
+    </div>
+
+    <form method="post">
+
+        <label>Cliente seleccionado:</label>
+        <input type="text" name="Cliente_ID" class="form-control"
+               value="@ViewBag.ClienteSeleccionado" readonly required />
+
+        <label>Marca</label>
+        <input name="Marca" class="form-control" value="@ViewBag.Marca" required />
+
+        <label>Tipo de Computadora</label>
+        <input name="Tipo_computadora" class="form-control"
+               value="@ViewBag.Tipo_computadora" required />
+
+        <label>Descripción del Problema</label>
+        <textarea name="Descripcion" class="form-control" required>@ViewBag.Descripcion</textarea>
+
+        <div class="form-actions">
+            <button class="btn btn-success" id="btnGuardar">Guardar</button>
+            <a href="/Recepcionista" class="btn btn-secondary">Volver</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        document.querySelector('form').addEventListener('submit', function() {
+            var btn = document.getElementById('btnGuardar');
+            btn.disabled = true;
+            btn.innerHTML = 'Guardando...';
+        });
+
+        @if (TempData["Error"] != null)
+        {
+                <text>
+                    setTimeout(function() {
+                        var btn = document.getElementById('btnGuardar');
+                        btn.disabled = false;
+                        btn.innerHTML = 'Guardar';
+                    }, 100);
+                </text>
+        }
+    </script>
+}
+
+<!-- antiguo codigo de registrar computadora sin <script> y sin mensajes de errores
+<h2>Registrar Computadora</h2>
+
+
+ prueba de lista de id de clientes para no memorizarlos xd 
+<a href="/Recepcionista/ListaClientes" class="btn btn-primary mb-3">Buscar Cliente</a>
+
+
+<form method="post">
+
+    <label>Cliente seleccionado:</label>
+    <input type="text" name="Cliente_ID" class="form-control" value="@ViewBag.ClienteSeleccionado" readonly />
+
+
+    <label>Marca</label>
+    <input name="Marca" class="form-control" />
+
+    <label>Tipo de Computadora</label>
+    <input name="Tipo_computadora" class="form-control" />
+
+    <label>Descripción del Problema</label>
+    <textarea name="Descripcion" class="form-control" required></textarea>
+
+    <button class="btn btn-success mt-3">Guardar</button>
+</form>
+
+<a href="/Recepcionista" class="btn btn-secondary mt-3">Volver</a>
+-->

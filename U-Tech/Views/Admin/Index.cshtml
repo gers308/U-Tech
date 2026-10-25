@@ -1,0 +1,89 @@
+﻿@section Styles {
+    <style>
+        .menu-card {
+            max-width: 600px;
+            margin: 30px auto;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 25px 30px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+        }
+
+            .menu-card h2 {
+                text-align: center;
+                font-weight: 700;
+                margin-bottom: 20px;
+            }
+
+        .list-group-item {
+            font-size: 1.1rem;
+            border: none;
+            padding: 14px 18px;
+            border-radius: 8px !important;
+            margin-bottom: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            transition: 0.2s;
+        }
+
+            .list-group-item:hover {
+                background: #f2f4f7;
+                transform: translateY(-2px);
+            }
+
+        .download-section {
+            margin-top: 35px;
+            text-align: center;
+        }
+
+            .download-section a {
+                width: 100%;
+                margin-top: 10px;
+            }
+    </style>
+}
+
+<div class="menu-card">
+
+    <h2>Panel de Administración</h2>
+
+    <div class="list-group">
+        <a asp-controller="Admin" asp-action="VerExpedientes" class="list-group-item list-group-item-action">
+            📚 Ver expedientes completos
+        </a>
+
+        <a asp-controller="Admin" asp-action="GestionSucursales" class="list-group-item list-group-item-action">
+            🏢 Gestionar sucursales
+        </a>
+
+        <a asp-controller="Admin" asp-action="GestionUsuarios" class="list-group-item list-group-item-action">
+            👥 Gestionar usuarios y roles
+        </a>
+
+        <a asp-controller="Admin" asp-action="ReportesGlobales" class="list-group-item list-group-item-action">
+            📊 Reportes globales del sistema
+        </a>
+    </div>
+
+    <div class="download-section">
+        <a asp-controller="Admin" asp-action="DescargarClientesComputadorasPDF" class="btn btn-success">
+            📄 Descargar PDF de Clientes y Computadoras
+        </a>
+
+        <a asp-controller="Admin" asp-action="DescargarSolicitudesPDF" class="btn btn-primary">
+            📄 Descargar PDF de Solicitudes en Proceso
+        </a>
+
+        <a asp-controller="Admin" asp-action="DescargarDiagnosticosPDF" class="btn btn-warning text-dark">
+            📄 Descargar PDF de Diagnósticos
+        </a>
+
+        <a asp-controller="Admin" asp-action="DescargarReparacionesPDF" class="btn btn-info">
+            🔧 Descargar PDF de Reparaciones Finalizadas
+        </a>
+
+        <a asp-controller="Admin" asp-action="DescargarExpedientesPDF" class="btn btn-dark">
+            📚 Descargar PDF de Expedientes Completos
+        </a>
+    </div>
+
+</div>

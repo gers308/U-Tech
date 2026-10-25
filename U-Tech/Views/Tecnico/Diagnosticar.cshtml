@@ -1,0 +1,154 @@
+﻿@{
+    ViewData["Title"] = "Registrar Diagnóstico";
+}
+
+@section Styles {
+    <style>
+        .form-card {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 25px 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+            .form-card h2 {
+                text-align: center;
+                font-weight: 700;
+                margin-bottom: 20px;
+            }
+
+            .form-card label {
+                margin-top: 12px;
+                font-weight: 600;
+            }
+
+        .btn-small {
+            padding: 4px 10px;
+            font-size: 0.85rem;
+        }
+    </style>
+}
+
+<div class="form-card">
+
+    <h2>Registrar Diagnóstico</h2>
+
+    <!-- Mensajes de éxito/error -->
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    <form asp-action="RegistrarDiagnostico" method="post" id="diagnosticoForm">
+        <input type="hidden" name="Solicitud_ID" value="@ViewBag.SolicitudID" />
+
+        <label>Descripción del diagnóstico</label>
+        <textarea name="Descripcion_Diagnostico"
+                  class="form-control"
+                  required
+                  placeholder="Describa el problema encontrado y la solución recomendada...">@ViewBag.Descripcion_Diagnostico</textarea>
+        <span id="descError" class="text-danger"></span>
+
+        <label>Costo estimado</label>
+        <input type="number"
+               name="Costo_Estimacion"
+               class="form-control"
+               required
+               step="0.01" min="0.01" max="100000"
+               value="@ViewBag.Costo_Estimacion"
+               placeholder="0.00$" />
+        <small class="form-text text-muted">Debe ser mayor a 0</small>
+        <span id="costoError" class="text-danger"></span>
+
+        <div class="d-flex justify-content-center mt-4 gap-2">
+            <button type="submit" class="btn btn-primary" id="btnGuardar">Guardar Diagnóstico</button>
+
+            <a href="@Url.Action("Index")" class="btn btn-secondary btn-small">Cancelar</a>
+        </div>
+    </form>
+
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('diagnosticoForm').addEventListener('submit', function (e) {
+            var descripcion = document.querySelector('textarea[name="Descripcion_Diagnostico"]').value.trim();
+            var costo = document.querySelector('input[name="Costo_Estimacion"]').value;
+            var descError = document.getElementById('descError');
+            var costoError = document.getElementById('costoError');
+
+            descError.textContent = '';
+            costoError.textContent = '';
+
+            var valid = true;
+
+            if (descripcion.length < 10) {
+                descError.textContent = 'La descripción debe tener al menos 10 caracteres';
+                valid = false;
+            }
+
+            if (!costo || costo <= 0) {
+                costoError.textContent = 'El costo estimado debe ser mayor a 0';
+                valid = false;
+            }
+
+            if (!valid) {
+                e.preventDefault();
+                return;
+            }
+
+            var btn = document.getElementById('btnGuardar');
+            btn.disabled = true;
+            btn.innerHTML = 'Guardando...';
+        });
+
+        @if (TempData["Error"] != null)
+        {
+                    <text>
+                    setTimeout(() => {
+                        var btn = document.getElementById('btnGuardar');
+                        btn.disabled = false;
+                        btn.innerHTML = 'Guardar Diagnóstico';
+                    }, 100);
+                    </text>
+        }
+
+        document.querySelector('textarea[name="Descripcion_Diagnostico"]').addEventListener('input', () => {
+            document.getElementById('descError').textContent = '';
+        });
+
+        document.querySelector('input[name="Costo_Estimacion"]').addEventListener('input', () => {
+            document.getElementById('costoError').textContent = '';
+        });
+    </script>
+}
+
+
+<!-- antiguo registrar diagnostico sin validaciones ni script
+{
+    ViewData["Title"] = "Registrar Diagnóstico";
+}
+
+<h2>Registrar Diagnóstico</h2>
+
+<form asp-action="RegistrarDiagnostico" method="post">
+    <input type="hidden" name="Solicitud_ID" value="@ViewBag.SolicitudID" />
+
+    <label>Descripción del diagnóstico</label>
+    <textarea name="Descripcion_Diagnostico" class="form-control"></textarea>
+
+    <label>Costo estimado</label>
+    <input type="text" name="Costo_Estimacion" class="form-control" />
+
+    <button type="submit" class="btn btn-primary mt-3">Guardar Diagnóstico</button>
+
+
+</form>
+-->

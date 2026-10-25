@@ -1,0 +1,29 @@
+﻿@model System.Data.DataTable
+
+<h2>Historial / Expedientes</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Computadora</th>
+            <th>Descripción Reparación</th>
+            <th>Técnico</th>
+            <th>Costo</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (System.Data.DataRow row in Model.Rows)
+        {
+            <tr>
+                <td>@row["Nombre_Cliente"]</td>
+                <td>@row["Marca_PC"] - @row["Tipo_computadora"]</td>
+                <td>@row["Descripcion"]</td>
+                <td>@row["Tecnico"]</td>
+                <td>@row["Costo_Final"]</td>
+                <td>@row["Fecha_Final"]</td>
+            </tr>
+        }
+    </tbody>
+</table>

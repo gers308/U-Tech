@@ -1,0 +1,69 @@
+﻿@section Styles {
+    <style>
+        .table-card {
+            max-width: 95%;
+            margin: 30px auto;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 25px 30px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+        }
+
+            .table-card h2 {
+                text-align: center;
+                font-weight: 700;
+                margin-bottom: 20px;
+            }
+
+        .table-responsive-custom {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            border-radius: 10px;
+        }
+
+        table thead th {
+            background: #f5f6f8;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        table tbody td {
+            white-space: nowrap;
+        }
+
+        table tbody tr:hover {
+            background: #f1f5ff !important;
+        }
+    </style>
+}
+
+<div class="table-card">
+    <h2>Expedientes Completos</h2>
+
+    <div class="table-responsive-custom">
+        <table class="table table-striped table-bordered mt-3">
+            <thead>
+                <tr>
+                    @foreach (System.Data.DataColumn col in Model.Columns)
+                    {
+                        <th>@(col.ColumnName.Replace("_", " "))</th>
+                    }
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (System.Data.DataRow row in Model.Rows)
+                {
+                    <tr>
+                        @foreach (var item in row.ItemArray)
+                        {
+                            <td>@item</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

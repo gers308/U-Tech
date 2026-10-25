@@ -1,0 +1,98 @@
+﻿/* =================================
+   ESTILOS DEL NAVBAR MODERNO
+   ================================= */
+.navbar-modern {
+    background: #A9C7C7;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 10px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+    .navbar-modern .navbar-brand {
+        font-weight: 700;
+        font-size: 20px;
+        color: #000 !important;
+    }
+
+/* Espaciado del menú */
+.menu-desplazado {
+    margin-left: 160px !important;
+}
+
+/* Botones modernos estilo "tag" */
+.navbar-modern .nav-link {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 14px;
+    color: #333 !important;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+    background: #fff;
+    transition: background .15s, color .15s, border-color .15s;
+}
+
+    /* Hover azul */
+    .navbar-modern .nav-link:hover {
+        background: rgba(47, 128, 237, 0.12);
+        border-color: rgba(47, 128, 237, 0.3);
+    }
+
+/* Texto del rol */
+.navbar-modern .navbar-text {
+    font-size: 14px;
+    color: #555 !important;
+    margin-right: 15px;
+}
+
+/* BOTÓN CERRAR SESIÓN */
+.btn-logout {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 14px;
+    color: #333 !important;
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color .15s, border-color .15s, color .15s;
+}
+
+    /* Hover rojo */
+    .btn-logout:hover {
+        background-color: #bd6551 !important;
+        border-color: #af5a49 !important;
+        color: #fff !important;
+    }
+
+/* =================================
+   ESTRUCTURA DEL LAYOUT
+   ================================= */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Color de fondo general */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #DFF2F2; /* <-- Cambia este color si quieres otro fondo */
+}
+
+/* Para empujar el footer al final */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* FOOTER */
+footer {
+    margin-top: auto !important;
+    background-color: #A9C7C7; /* <-- Color del footer */
+    color: #000; /* Color del texto */
+    padding: 15px 0;
+    text-align: center;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}

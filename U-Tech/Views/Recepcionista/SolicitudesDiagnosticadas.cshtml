@@ -1,0 +1,69 @@
+﻿@model System.Data.DataTable
+
+<div class="table-card">
+    <h2>Solicitudes Diagnosticadas</h2>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>ID de Solicitud</th>
+                <th>Cliente</th>
+                <th>Computadora</th>
+                <th>Sucursal</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow row in Model.Rows)
+            {
+                <tr>
+                    <td>@row["Solicitud_ID"]</td>
+                    <td>@row["Nombre_Cliente"]</td>
+                    <td>@row["Marca_PC"] - @row["Tipo_computadora"]</td>
+                    <td>@row["Nombre_Sucursal"]</td>
+                    <td>
+                        <a asp-action="DecidirCliente"
+                           asp-route-id="@row["Solicitud_ID"]"
+                           class="btn btn-success btn-sm">
+                            Registrar decisión
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-center mt-3">
+        <a href="/Recepcionista" class="btn btn-secondary">Volver</a>
+    </div>
+</div>
+@section Styles {
+    <style>
+        .table-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            margin-bottom: 30px;
+        }
+
+            .table-card h2 {
+                font-weight: 700;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+        table thead tr {
+            background: #f2f4f7;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        table thead th {
+            font-weight: 600;
+        }
+
+        table tbody tr:hover {
+            background: #f9f9f9;
+        }
+    </style>
+}

@@ -1,0 +1,113 @@
+﻿@section Styles {
+    <style>
+        /* Contenedor principal */
+        .form-card {
+            max-width: 500px;
+            margin: 0 auto; /* Centrado */
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 25px 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+            .form-card h2 {
+                text-align: center;
+                font-weight: 700;
+                margin-bottom: 20px;
+            }
+
+            /* Espaciado entre inputs */
+            .form-card label {
+                margin-top: 12px;
+                font-weight: 600;
+            }
+
+            .form-card input {
+                margin-bottom: 5px;
+            }
+
+        /* Botones */
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+    </style>
+}
+
+<div class="form-card">
+
+    <h2>Registrar Cliente</h2>
+
+    <!-- Mensajes -->
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    <form method="post">
+
+        <label>Nombre</label>
+        <input name="Nombre" class="form-control" required value="@ViewBag.Nombre" />
+
+        <label>Teléfono</label>
+        <input name="Telefono" class="form-control" required
+               value="@ViewBag.Telefono"
+               pattern="[0-9]+"
+               title="Solo se permiten números"
+               oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+
+        <label>Email</label>
+        <input name="Email" class="form-control" required value="@ViewBag.Email" />
+
+        <div class="form-actions">
+            <button class="btn btn-success" id="btnGuardar">Guardar</button>
+            <a href="/Recepcionista" class="btn btn-secondary">Volver</a>
+        </div>
+    </form>
+
+</div>
+
+@section Scripts {
+    <script>
+        document.querySelector('form').addEventListener('submit', function () {
+            var btn = document.getElementById('btnGuardar');
+            btn.disabled = true;
+            btn.innerHTML = 'Guardando...';
+        });
+
+        document.querySelector('input[name="Telefono"]').addEventListener('input', function () {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    </script>
+}
+
+
+
+
+<!-- Antiguo código sin manejo de mensajes y sin persistencia de datos
+
+<h2>Registrar Cliente</h2>
+
+<form method="post">
+    <label>Nombre</label>
+    <input name="Nombre" class="form-control" required />
+
+    <label>Teléfono</label>
+    <input name="Telefono" class="form-control" required />
+
+    <label>Email</label>
+    <input name="Email" class="form-control" required />
+
+    <button class="btn btn-success mt-3">Guardar</button>
+</form>
+
+<a href="/Recepcionista" class="btn btn-secondary mt-3">Volver</a>
+
+-->

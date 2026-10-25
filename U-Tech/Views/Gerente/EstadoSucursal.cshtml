@@ -1,0 +1,30 @@
+﻿@model System.Data.DataTable
+@{
+    ViewData["Title"] = "Estado de la Sucursal";
+}
+
+<h2>Estado de procesos en la sucursal</h2>
+
+<table class="table table-bordered table-striped mt-3">
+    <thead>
+        <tr>
+            @foreach (System.Data.DataColumn col in Model.Columns)
+            {
+                <th>@col.ColumnName</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (System.Data.DataRow row in Model.Rows)
+        {
+            <tr>
+                @foreach (var item in row.ItemArray)
+                {
+                    <td>@item</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-controller="Gerente" asp-action="Index" class="btn btn-secondary">Volver</a>
